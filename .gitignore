@@ -1,3 +1,11 @@
+# Custom gitignore
+_ref/
+generations/*.yaml
+results/*.yaml
+results/*/
+generations/*/
+characters/*/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
