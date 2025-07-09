@@ -14,7 +14,6 @@ class Claude:
         ##############################
         
         roleplayScene = [character.startmessage]  # Initialize roleplayScene with the starting message
-        cot_guide = ""  # Initialize Chain of Thought guide for the character
         sample_dialogue = ""  # Initialize dialogue for the character
 
 
@@ -24,53 +23,8 @@ class Claude:
             prompt += f"{dialogue}\n"
             sample_dialogue += f"{dialogue}\n"
             # If config.smp_dialogues_max is 2, then 4 utterances (2 from user character, 2 from test character) will be included in the prompt
-        
-        # Start Chain of Thought prompting
-        # Step 1
-        prompt += f"\nStep 1: deeply analyze {character.name}'s personality, motivations, and behavioral traits based on the following attributes and sample dialogues. Reflect on these key questions as you think about how to roleplay the character:" \
-              f"\n1. What drives {character.name} emotionally? What are their core desires or fears?" \
-              f"\n2. How does {character.name}'s past or experiences shape their current behavior?" \
-              f"\n3. How does {character.name} typically speak and interact with others based on their attributes?" \
-              f"\n4. In what situations does {character.name} show vulnerability, strength, or hesitation?\n\n"
-        
-        ##############################
-        cot_response = client.messages.create(
-                    max_tokens=1024,
-                    messages=[
-                        {"role": "user", "content": "You are a helpful and expert roleplayer."},
-                        {"role": "user", "content": prompt},
-                    ],
-                    model=f"{config.test_llm}",
-                )
-        ##############################
-
-        cot_generation = cot_response.content[0].text
-        character.cotguide += f"{cot_generation}\n"
-
-        prompt += f"{cot_generation}\n"
-        # Step 2
-        prompt += f"\nStep 2: Now, based on {character.name}'s analysis in Step 1, outline a behavioral strategy for roleplaying {character.name}. Consider the following:" \
-              f"\n1. What communication style or tone should {character.name} use in typical conversations (e.g., formal, hesitant, kind, direct)?" \
-              f"\n2. How should {character.name} in common situations (e.g., conflict, praise, meeting strangers)?" \
-              f"\n3. Which specific traits or speech patterns must be consistently present to remain true to {character.name}'s core personality?" \
-              f"\n4. What should {character.name} avoid doing or saying to remain authentic to their defined attributes?\n\n"
-        
-        ##############################
-        cot_response = client.messages.create(
-                    max_tokens=1024,
-                    messages=[
-                        {"role": "user", "content": "You are a helpful and expert roleplayer."},
-                        {"role": "user", "content": prompt},
-                    ],
-                    model=f"{config.test_llm}",
-                )
-        ##############################
-
-        cot_generation = cot_response.content[0].text
-        character.cotguide += f"{cot_generation}\n"
-        prompt += f"{cot_generation}\n"
-        # Step 3
-        prompt += f"\nStep 3: Now, the following is a new roleplay scenario. Only generate one response a time from the current speaker. The characters MUST alternately speak ({character.name} THEN {config.user_name},vice-versa). Try to keep the roleplay scene playing for as long as possible between {config.user_name} and {character.name} as well as follow the outline you made in Steps 1 and 2 as a guide. Don't forget {character.name}'s attributes and way of speech, as seen in:\n\nAttributes: {character.attributes}Sample Dialogues:\n{sample_dialogue}\nMake sure to keep the dialogue dynamic and not too formulaic, following the sample dialogues and demonstrated speech style, especially for characters with certain habits (such as stuttering, replying in all caps, or using exclamations '!' or tildes '~', ONLY if present) but avoid the sentence structure itself from being repetitive (always starting with '{character.name} does X' into '{character.name} says X' pattern is bad and formulaic. Instead, use a mix of actions preceding speech, speech preceding actions, subtle actions within spoken lines, and variations in sentence starters (not only one of these, use all of them as demonstrated in the sample dialogues), as well as proper usage of pronouns and character's name. Continue the next empty line. \n\n{character.startmessage}"
+      
+        prompt += "[The following is a new roleplay scene.]\n\n{character.startmessage}"
 
         # Start roleplay scene generation with LLM
         conversation_turns = 1  # Start counting after the initial message
