@@ -8,7 +8,7 @@
 <h3 align="center">UWU-Benchmarks</h3>
 
   <p align="center">
-    Accessible benchmarking tool for evaluating roleplaying performance of LLMs given k-shot prompts
+    Accessible benchmarking tool for evaluating roleplaying performance of LLMs on User-Written Unknown (UWU) Characters given k-shot prompts.
     <br />
     <a href="https://github.com/Eliolocin/UWU-Benchmarks"><strong>Explore the docs »</strong></a>
     <br />
@@ -52,7 +52,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-UWU-Benchmarks is a comprehensive evaluation framework designed to assess the roleplay performance of Large Language Models (LLMs). The tool evaluates how well LLMs can maintain character consistency, writing style, and creative storytelling in interactive roleplay scenarios.
+UWU-Benchmarks is a comprehensive evaluation framework designed to assess the roleplay performance of Large Language Models (LLMs). The tool evaluates how well LLMs can maintain character consistency, writing style, and creative storytelling in interactive roleplay scenarios with original characters that are not seen in training data (unlike Harry Potter, or Piglet), referred to as User-Written Unknown (UWU) Characters.
 
 ![UWU Characters](img/uwu_characters.png)
 <div align="center">
