@@ -1,4 +1,4 @@
-## UWUe Benchmarks
+## UWU Benchmarks
 ### NVCS (N-Gram Vector Cosine Similarity)
 - See how similar two texts' writing styles are using Character N-Grams (sequence of characters and punctuations). 
 - Converts the Sample Dialogues and the Generated Response into Character N-Gram Vectors in which Cosine Similarity will be calculated. 

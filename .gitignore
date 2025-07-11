@@ -6,6 +6,8 @@ results/*/
 generations/*/
 characters/*/
 config.ini
+.claude/
+CLAUDE.md
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
